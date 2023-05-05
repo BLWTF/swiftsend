@@ -1,0 +1,28 @@
+{
+  "development": {
+    "dialect": "mysql",
+    "username": "uld169i3n1ovzpcbx6qc",
+    "password": "pscale_pw_9GuP1V0jHI1FbZfEnHGGbsFSdYpKWTGgWyIawl3h2RT",
+    "database": "earth-scale",
+    "host": "aws.connect.psdb.cloud",
+    "migrationStorageTableName": "SwiftSend_SequelizeMeta",
+    "dialectOptions": {
+      "ssl": {
+        "rejectUnauthorized": true
+      }
+    }
+  },
+  "production": {
+    "dialect": "mysql",
+    "username": "uld169i3n1ovzpcbx6qc",
+    "password": "pscale_pw_9GuP1V0jHI1FbZfEnHGGbsFSdYpKWTGgWyIawl3h2RT",
+    "database": "earth-scale",
+    "host": "aws.connect.psdb.cloud",
+    "migrationStorageTableName": "SwiftSend_SequelizeMeta",
+    "dialectOptions": {
+      "ssl": {
+        "rejectUnauthorized": true
+      }
+    }
+  }
+}
