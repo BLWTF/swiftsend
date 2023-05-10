@@ -1,8 +1,8 @@
 {
   "development": {
     "dialect": "mysql",
-    "username": "uld169i3n1ovzpcbx6qc",
-    "password": "pscale_pw_9GuP1V0jHI1FbZfEnHGGbsFSdYpKWTGgWyIawl3h2RT",
+    "username": "a6g4qgkc2kujs5luwk5t",
+    "password": "pscale_pw_yRpKDYYVvVff9k6ryr4u1VsTpezcdbGEHmkZapoDb0D",
     "database": "earth-scale",
     "host": "aws.connect.psdb.cloud",
     "migrationStorageTableName": "SwiftSend_SequelizeMeta",
@@ -14,8 +14,8 @@
   },
   "production": {
     "dialect": "mysql",
-    "username": "uld169i3n1ovzpcbx6qc",
-    "password": "pscale_pw_9GuP1V0jHI1FbZfEnHGGbsFSdYpKWTGgWyIawl3h2RT",
+    "username": "a6g4qgkc2kujs5luwk5t",
+    "password": "pscale_pw_yRpKDYYVvVff9k6ryr4u1VsTpezcdbGEHmkZapoDb0D",
     "database": "earth-scale",
     "host": "aws.connect.psdb.cloud",
     "migrationStorageTableName": "SwiftSend_SequelizeMeta",

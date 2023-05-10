@@ -6,10 +6,11 @@ import {
   Image,
   Link,
   Stack,
-	useDisclosure,
+  useDisclosure,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import LoginDrawer from "./login-drawer";
+import RegisterDrawer from "./register-drawer";
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href;
@@ -22,7 +23,16 @@ const LinkItem = ({ href, path, children }) => {
 };
 
 export default function LandingNavbar() {
-	const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isLoginOpen,
+    onOpen: onLoginOpen,
+    onClose: onLoginClose,
+  } = useDisclosure();
+  const {
+    isOpen: isRegisterOpen,
+    onOpen: onRegisterOpen,
+    onClose: onRegisterClose,
+  } = useDisclosure();
 
   return (
     <Box as="nav" w="100%" zIndex={99} position="fixed" top={0}>
@@ -57,13 +67,14 @@ export default function LandingNavbar() {
           </Stack>
 
           <Box flex={1} align="right">
-            <Button bg="#0088b4" color="#FFF" onClick={onOpen}>
+            <Button bg="#0088b4" color="#FFF" onClick={onLoginOpen}>
               Sign In
             </Button>
           </Box>
         </Box>
       </Container>
-      <LoginDrawer isOpen={isOpen} onClose={onClose} />
+      <LoginDrawer isOpen={isLoginOpen} onClose={onLoginClose} onRegisterOpen={onRegisterOpen} />
+      <RegisterDrawer isOpen={isRegisterOpen} onClose={onRegisterClose} onLoginOpen={onLoginOpen} />
     </Box>
   );
 }

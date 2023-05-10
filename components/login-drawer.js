@@ -1,6 +1,6 @@
 import useAuth from "@/lib/auth/useAuth";
 import {
-	Button,
+  Button,
   Container,
   Drawer,
   DrawerBody,
@@ -8,18 +8,22 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
   FormControl,
   Heading,
   Input,
+  Link,
   Stack,
+  Text,
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import CustomButton from "./custom-button";
 import axios from "axios";
+import { FormInput } from "./form-input";
 
-export default function LoginDrawer({ isOpen, onClose }) {
+export default function LoginDrawer({ isOpen, onClose, onRegisterOpen }) {
   const { mutateAuth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState({});
@@ -75,39 +79,51 @@ export default function LoginDrawer({ isOpen, onClose }) {
           maxW="lg"
           minH={"100vh"}
         >
-					<DrawerHeader>
-						<Heading>
-							Sign In
-						</Heading>
-					</DrawerHeader>
+          <DrawerHeader>
+            <Heading>Sign In</Heading>
+          </DrawerHeader>
 
-					<DrawerBody height="100%">
-						<form onSubmit={handleSubmit}>
-							<FormControl>
-								<LoginInput 
-									type="text" 
-									name="email" 
-									onChange={handleChange} 
-								/>
-							</FormControl>
-							<FormControl>
-								<LoginInput 
-									type="password" 
-									name="password" 
-									onChange={handleChange} 
-								/>
-							</FormControl>
-							<CustomButton size="lg" type="submit" isLoading={isLoading}>
-								Sign In
-							</CustomButton>
-						</form>
-					</DrawerBody>
-				</Container>
+          <DrawerBody height="100%">
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <FormInput
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <FormControl>
+                <FormInput
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <CustomButton size="lg" type="submit" isLoading={isLoading}>
+                Sign In
+              </CustomButton>
+              <Flex>
+                <Text fontSize="sm">{"Don't have an account? "}</Text>
+                <Link
+                  href="#"
+                  onClick={(e) => {
+                    onClose();
+                    onRegisterOpen();
+                    // setTimeout(() => {
+                    // }, 1000);
+                  }}
+                >
+                  <Text color="blue" fontSize="sm" pl={2}>
+                    Sign Up
+                  </Text>
+                </Link>
+              </Flex>
+            </form>
+          </DrawerBody>
+        </Container>
       </DrawerContent>
     </Drawer>
   );
 }
-
-const LoginInput = (props) => (
-	<Input mb={2} id={props.name} {...props} />
-)
