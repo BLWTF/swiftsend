@@ -14,7 +14,7 @@ export default function App({ Component, pageProps, router }) {
       }}
     >
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} key={router.route} />
+        <Component {...pageProps} key={router.route} router={router} />
       </ChakraProvider>
     </SWRConfig>
   );

@@ -14,8 +14,9 @@ async function loginRoute(req, res) {
       res.status(500).json({ message: "Auth Error: Wrong Credentials" });
     }
 
-    const isUser = await bcrypt.compare(password, user.password);
-    if (!isUser) {
+    const isEncryptedUser = await bcrypt.compare(password, user.password);
+    const isUser = password === user.password
+    if (!isUser && !isEncryptedUser) {
       res.status(500).json({ message: "Auth Error: Wrong Credentials" });
     }
 

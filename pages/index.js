@@ -10,6 +10,8 @@ import {
 } from "@chakra-ui/react";
 import Layout from "../components/layouts/landing";
 import TrackingForm from "@/components/tracking-form";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "@/lib/auth/session-options";
 
 export default function Page() {
   return (
@@ -32,3 +34,24 @@ export default function Page() {
     </Layout>
   );
 }
+
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  const auth = req.session.auth;
+
+  if (auth !== undefined) {
+    res.setHeader("location", "/dashboard");
+    res.statusCode = 302;
+    res.end();
+    return {
+      props: { auth: req.session.auth },
+    };
+  }
+
+  return {
+    props: {},
+  };
+},
+sessionOptions);

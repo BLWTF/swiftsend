@@ -33,7 +33,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   }
 
   if (auth.user.isAdmin) {
-    res.setHeader("location", "/admin/dashboard");
+    res.setHeader("location", "/admin");
     res.statusCode = 302;
     res.end();
     return {
