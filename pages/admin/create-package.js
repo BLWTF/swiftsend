@@ -268,8 +268,8 @@ export default function Create({ router, auth }) {
               <FormControl>
                 <FormLabel>Note</FormLabel>
 								<Textarea 
-									name="packageWeight"
-									value={inputs.packageWeight}
+									name="note"
+									value={inputs.note}
 									onChange={handleChange}
 								/>
               </FormControl>

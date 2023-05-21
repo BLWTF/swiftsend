@@ -5,10 +5,8 @@ export default async function handler(req, res) {
     const { set, limit, search } = req.query;
     const offset = limit * (set - 1);
     const service = new SqlizeService();
-    const packages = await service.getPackages({ search });
+    const packages = await service.getPackages({ search, limit, offset });
     const packagesCount = await service.countPackages({
-      limit,
-      offset,
       search,
     });
     const packagesJson = packages.map((p) => p.toJSON());

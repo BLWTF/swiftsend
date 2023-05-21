@@ -12,6 +12,6 @@ export const Wrap = styled(Box)`
 		height: 100%;
 		background-image: url("/images/lines-bg.png");
 		background-size: auto;
-		background-position: 70% 0;
+		background-position: 10% 5%;
 	}
 `

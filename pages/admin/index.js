@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function Page({ router, auth }) {
 	useEffect(() => {
-    router.push("/admin/users");
+    router.push("/admin/customers");
   }, [router]);
 
   return (

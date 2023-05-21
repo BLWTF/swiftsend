@@ -23,7 +23,6 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { formatSets, getSets } from "@/lib/helpers";
-import NextLink from "next/link";
 import { RiAddCircleFill } from "react-icons/ri";
 
 export default function Customers({ router, auth }) {
@@ -36,7 +35,6 @@ export default function Customers({ router, auth }) {
     pagination.limit
   }${searchQuery ? "&search=" + searchQuery : ""}`;
   const { data, error, isLoading } = useSWR(url);
-  console.log(data);
   const packages = data?.packages;
   const packagesCount = data?.count;
 
@@ -162,7 +160,6 @@ const PackagesPaginatedTable = ({
         <Flex>
           <Button
             align="center"
-            color="#FFF"
             bg="transparent"
             size="lg"
             isLoading
@@ -175,8 +172,11 @@ const PackagesPaginatedTable = ({
           <Table size="sm" variant="simple">
             <Thead>
               <Tr>
-                <Th>P No.</Th>
-                <Th>Customer</Th>
+                <Th>Tracking No.</Th>
+                <Th>Sender</Th>
+                <Th>Content</Th>
+                <Th>From</Th>
+                <Th>To</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -187,6 +187,20 @@ const PackagesPaginatedTable = ({
                   </Td>
                 </Tr>
               )}
+              {packages.length > 0 &&
+                packages.map((pkg) => (
+                  <Tr key={pkg.id}>
+                    <Td>
+                      <Link color="blue" href={`/admin/package?id=${pkg.id}`}>
+                        {pkg.trackingNumber}
+                      </Link>
+                    </Td>
+                    <Td>{pkg.senderName}</Td>
+                    <Td>{pkg.packageContent}</Td>
+                    <Td>{pkg.fromCity.name}</Td>
+                    <Td>{pkg.toCity.name}</Td>
+                  </Tr>
+                ))}
             </Tbody>
           </Table>
         </TableContainer>

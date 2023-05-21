@@ -35,7 +35,16 @@ export default function LandingNavbar() {
   } = useDisclosure();
 
   return (
-    <Box as="nav" w="100%" zIndex={99} position="fixed" top={0}>
+    <Box
+      as="nav"
+      w="100%"
+      position="fixed"
+      bg="#FFF" 
+      top={0}
+      borderBottomStyle="solid"
+      borderBottomWidth="thin"
+      zIndex={99}
+    >
       <Container p={2} maxW="container.lg">
         <Box
           display="flex"
@@ -73,8 +82,16 @@ export default function LandingNavbar() {
           </Box>
         </Box>
       </Container>
-      <LoginDrawer isOpen={isLoginOpen} onClose={onLoginClose} onRegisterOpen={onRegisterOpen} />
-      <RegisterDrawer isOpen={isRegisterOpen} onClose={onRegisterClose} onLoginOpen={onLoginOpen} />
+      <LoginDrawer
+        isOpen={isLoginOpen}
+        onClose={onLoginClose}
+        onRegisterOpen={onRegisterOpen}
+      />
+      <RegisterDrawer
+        isOpen={isRegisterOpen}
+        onClose={onRegisterClose}
+        onLoginOpen={onLoginOpen}
+      />
     </Box>
   );
 }

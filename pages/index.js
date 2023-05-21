@@ -16,18 +16,21 @@ import { sessionOptions } from "@/lib/auth/session-options";
 export default function Page() {
   return (
     <Layout>
-      <Box>
+      <Box pt={6}>
         <Container maxW="container.lg">
-          <Stack minH="100vh" direction={{ base: "column", md: "row" }} m={5}>
-            <Flex p={8} flex={1} align="center">
-              <Stack direction="column" spacing={7}>
-                <Heading fontSize="5xl">Quickest & Safest Delivery</Heading>
-                <TrackingForm />
-              </Stack>
-            </Flex>
-            <Flex flex={1} align="center">
-              <Image alt="" src="/images/d-1.png" />
-            </Flex>
+          <Stack direction="column">
+            <Stack minH="100vh" direction={{ base: "column", md: "row" }} m={5}>
+              <Flex p={8} flex={1} align="center">
+                <Stack direction="column" spacing={7}>
+                  <Heading fontSize="5xl">Quickest & Safest Delivery</Heading>
+                  <TrackingForm />
+                </Stack>
+              </Flex>
+              <Flex flex={1} align="center">
+                <Image alt="" src="/images/hero.png" />
+              </Flex>
+            </Stack>
+            
           </Stack>
         </Container>
       </Box>

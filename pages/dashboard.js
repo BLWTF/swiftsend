@@ -2,10 +2,17 @@ import { Box, Container } from "@chakra-ui/react"
 import Layout from "../components/layouts/account"
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "@/lib/auth/session-options";
+import { useEffect } from "react";
 
-export default function Dashboard() {
+export default function Dashboard({ router, auth }) {
+  useEffect(() => {
+    if (auth === undefined) {
+      router.push("/admin");
+    }
+  }, [auth, router]);
+
 	return (
-		<Layout>
+		<Layout router={router} auth={auth}>
 			<Box>
 				<Container maxW="container.lg">
 
