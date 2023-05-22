@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function Page({ router, auth }) {
 	useEffect(() => {
-    router.push("/admin/customers");
+    router.push("/admin/packages");
   }, [router]);
 
   return (
@@ -31,7 +31,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   req,
   res,
 }) {
-  res.setHeader("location", "/admin/customers");
+  res.setHeader("location", "/admin/packages");
   res.statusCode = 302;
   res.end();
   return {

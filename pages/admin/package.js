@@ -11,6 +11,7 @@ import {
   CardHeader,
   Flex,
   Heading,
+  Icon,
   IconButton,
   Menu,
   MenuButton,
@@ -37,10 +38,10 @@ export default function Page({ router, auth, pkg }) {
     router.reload(window.location.pathname);
   }
 
-	async function handleDelete() {
-		await axios.delete(`/api/admin/delete-package?packageId=${pkg.id}`);
-		router.push("/admin/packages");
-	}
+  async function handleDelete() {
+    await axios.delete(`/api/admin/delete-package?packageId=${pkg.id}`);
+    router.push("/admin/packages");
+  }
 
   return (
     <Layout router={router} auth={auth}>
@@ -51,14 +52,16 @@ export default function Page({ router, auth, pkg }) {
           </Heading>
 
           <Menu>
-            <MenuButton>
-              <IconButton size="lg" icon={<MdPending />} />
-            </MenuButton>
-						<MenuList>
-							<MenuItem icon={<DeleteIcon />} onClick={handleDelete}>
-								Delete
-							</MenuItem>
-						</MenuList>
+            <MenuButton
+              as={IconButton}
+              aria-label="Delete"
+              icon={<MdPending />}
+            />
+            <MenuList>
+              <MenuItem icon={<DeleteIcon />} onClick={handleDelete}>
+                Delete
+              </MenuItem>
+            </MenuList>
           </Menu>
         </Box>
 

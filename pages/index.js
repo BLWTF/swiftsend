@@ -1,11 +1,9 @@
 import {
   Box,
-  Button,
   Container,
   Flex,
   Heading,
   Image,
-  Input,
   Stack,
 } from "@chakra-ui/react";
 import Layout from "../components/layouts/landing";

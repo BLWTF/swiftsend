@@ -3,7 +3,7 @@ import Head from "next/head";
 import LandingNavbar from "../landing-navbar";
 import { Wrap } from "../wrap";
 
-export default function Main({ children }) {
+export default function Main({ children, noWrap = false }) {
   return (
     <>
       <Head>
@@ -21,11 +21,20 @@ export default function Main({ children }) {
         <link rel="icon" type="image/x-icon" href="images/favicon.ico"></link>
       </Head>
 
-      <Wrap>
-        <LandingNavbar />
+      {!noWrap && (
+        <Wrap>
+          <LandingNavbar />
 
-        <Box>{children}</Box>
-      </Wrap>
+          <Box>{children}</Box>
+        </Wrap>
+      )}
+      {noWrap && (
+        <>
+          <LandingNavbar />
+
+          <Box>{children}</Box>
+        </>
+      )}
     </>
   );
 }

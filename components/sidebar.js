@@ -5,14 +5,14 @@ import { RiUserSettingsLine, RiUserSettingsFill, RiArchiveFill, RiArchiveLine } 
 
 const adminItems = [
   {
-    title: "Customers",
-    href: "/admin/customers",
-    icons: [RiUserSettingsFill, RiUserSettingsLine],
-  },
-  {
     title: "Packages",
     href: "/admin/packages",
     icons: [RiArchiveFill, RiArchiveLine],
+  },
+  {
+    title: "Customers",
+    href: "/admin/customers",
+    icons: [RiUserSettingsFill, RiUserSettingsLine],
   },
 ];
 
