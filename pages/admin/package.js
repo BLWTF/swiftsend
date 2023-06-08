@@ -17,6 +17,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Select,
   Stack,
   StackDivider,
   Tag,
@@ -26,10 +27,15 @@ import axios from "axios";
 import { withIronSessionSsr } from "iron-session/next";
 import { useState } from "react";
 import { BiPause, BiPlay } from "react-icons/bi";
+import { FaRegCopy } from "react-icons/fa";
 import { MdPending } from "react-icons/md";
+
+const statusOptions = ["pending pickup", "in transit", "delivered"];
 
 export default function Page({ router, auth, pkg }) {
   const [isLoadingPause, setIsLoadingPause] = useState(false);
+  const [status, setStatus] = useState(pkg.deliveryStatus);
+  const [isLoadingStatus, setIsLoadingStatus] = useState(false);
 
   async function togglePause() {
     setIsLoadingPause(true);
@@ -43,12 +49,19 @@ export default function Page({ router, auth, pkg }) {
     router.push("/admin/packages");
   }
 
+  async function handleUpdate(body) {
+    body.deliveryStatus ? setIsLoadingStatus(true) : null;
+    await axios.post(`/api/admin/update-package?packageId=${pkg.id}`, body);
+    body.deliveryStatus ? setStatus(body.deliveryStatus) : null;
+    body.deliveryStatus ? setIsLoadingStatus(false) : null;
+  }
+
   return (
     <Layout router={router} auth={auth}>
       <Box p={2}>
         <Box display="flex" pb={5} justifyContent="space-between">
           <Heading as="h3" variant="page-title">
-            Package - {pkg.trackingNumber}
+            Package
           </Heading>
 
           <Menu>
@@ -68,6 +81,19 @@ export default function Page({ router, auth, pkg }) {
         <Card align="center">
           <CardBody>
             <Stack divider={<StackDivider />} spacing={2}>
+              <Flex justifyContent="space-between">
+                <Text fontWeight="light">Tracking Number:</Text>
+                <Stack direction="row">
+                  <Text fontWeight="bold">{pkg.trackingNumber}</Text>
+                  <IconButton
+                    icon={<FaRegCopy />}
+                    size="xs"
+                    onClick={(e) =>
+                      navigator.clipboard.writeText(pkg.trackingNumber)
+                    }
+                  />
+                </Stack>
+              </Flex>
               <Flex justifyContent="space-between">
                 <Stack direction="column" spacing={0}>
                   <Text fontWeight="light">Sender Name:</Text>
@@ -92,25 +118,47 @@ export default function Page({ router, auth, pkg }) {
                 <Text fontWeight="light">From:</Text>
                 <Text fontWeight="bold">
                   {`${pkg.fromAddress}`}
-                  {pkg.fromCity?.id ? `, ${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}` : ""}
+                  {pkg.fromCity?.id
+                    ? `, ${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}`
+                    : ""}
                 </Text>
               </Stack>
               <Stack direction="column" spacing={0}>
                 <Text fontWeight="light">To:</Text>
                 <Text fontWeight="bold">
                   {`${pkg.toAddress}`}
-                  {pkg.toCity?.id ? `, ${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}` : ""}
+                  {pkg.toCity?.id
+                    ? `, ${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}`
+                    : ""}
                 </Text>
               </Stack>
               <Flex justifyContent="space-between">
                 <Stack direction="column" spacing={0}>
                   <Text fontWeight="light">Status:</Text>
-                  <Tag colorScheme="orange">
-                    <Text fontWeight="bold">
-                      {capitalizeFirst(pkg.deliveryStatus)}
-                    </Text>
-                  </Tag>
+                  <Stack direction="row" spacing={1}>
+                    <Select
+                      value={status}
+                      onChange={(e) =>
+                        handleUpdate({ deliveryStatus: e.target.value })
+                      }
+                    >
+                      {statusOptions.map((e) => (
+                        <option key={e} value={e}>
+                          {capitalizeFirst(e)}
+                        </option>
+                      ))}
+                    </Select>
+                    {isLoadingStatus && <Button
+                      align="center"
+                      bg="transparent"
+                      size="lg"
+                      isLoading
+                      disabled
+                    ></Button>}
+                  </Stack>
                 </Stack>
+              </Flex>
+              <Flex justifyContent="space-between">
                 {pkg.isPaused && (
                   <Button
                     colorScheme="green"

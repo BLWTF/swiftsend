@@ -16,18 +16,6 @@ export default async function handler(req, res) {
   const service = new SqlizeService();
 
   try {
-		console.log({
-      fromAddress,
-      toAddress,
-      fromCityId: senderCityId,
-      toCityId: recipientCityId,
-      senderName,
-      recipientName,
-      trackingNumber,
-      packageContent,
-      packageWeight,
-      note,
-    })
     const pkg = await service.createPackage({
       fromAddress,
       toAddress,

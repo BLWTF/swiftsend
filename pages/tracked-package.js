@@ -12,6 +12,7 @@ import {
   Stack,
   Tag,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import Layout from "../components/layouts/landing";
 import { withIronSessionSsr } from "iron-session/next";
@@ -20,8 +21,36 @@ import SqlizeService from "@/lib/database/services/sqlize";
 import { capitalizeFirst } from "@/lib/helpers";
 import { TfiLineDotted } from "react-icons/tfi";
 import { FaRegDotCircle } from "react-icons/fa";
+import useSWR from "swr";
+import { useEffect } from "react";
+
+const statusOptions = ["pending pickup", "in transit", "delivered"];
 
 export default function Page({ pkg }) {
+  const toast = useToast();
+  const { data, isLoading } = useSWR(
+    `/api/admin/is-paused?packageId=${pkg.id}`
+  );
+  const isPaused = data?.isPaused;
+  console.log("isPaused");
+  console.log(isPaused);
+
+  useEffect(() => {
+    if (isPaused !== undefined) {
+      if (isPaused) {
+        toast({
+          title: "Error",
+          description:
+            "We have an issue with your package. Please contact or chat with us. Thanks.",
+          status: "error",
+          duration: null,
+          position: "top-right",
+          isClosable: true,
+        });
+      }
+    }
+  }, [isPaused, toast]);
+
   return (
     <Layout noWrap>
       <Box pt={20}>
@@ -63,7 +92,12 @@ export default function Page({ pkg }) {
                       <Text fontSize="sm" fontWeight="medium">
                         From
                       </Text>
-                      <Text>{`${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}`}</Text>
+                      <Text>
+                        {`${pkg.fromAddress}`}
+                        {pkg.fromCity?.id
+                          ? `, ${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}`
+                          : ""}
+                      </Text>
                     </Stack>
 
                     <Stack
@@ -81,7 +115,12 @@ export default function Page({ pkg }) {
                       <Text fontSize="sm" fontWeight="medium">
                         To
                       </Text>
-                      <Text>{`${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}`}</Text>
+                      <Text>
+                        {`${pkg.toAddress}`}
+                        {pkg.toCity?.id
+                          ? `, ${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}`
+                          : ""}
+                      </Text>
                     </Stack>
                   </Flex>
 
@@ -93,44 +132,82 @@ export default function Page({ pkg }) {
                         align="center"
                         py={5}
                       >
-                        <Flex align="center">
-                          <Icon boxSize={4} as={FaRegDotCircle} color="#0088b4" />
-                        </Flex>
+                        <Icon
+                          boxSize={4}
+                          as={FaRegDotCircle}
+                          color={
+                            statusOptions[0] === pkg.deliveryStatus
+                              ? "blue.900"
+                              : "gray"
+                          }
+                        />
                         <Icon
                           boxSize={16}
                           as={TfiLineDotted}
                           transform="rotate(90deg)"
                           color="gray"
                         />
-                        <Icon boxSize={4} as={FaRegDotCircle} color="gray" />
+                        <Icon
+                          boxSize={4}
+                          as={FaRegDotCircle}
+                          color={
+                            statusOptions[1] === pkg.deliveryStatus
+                              ? "blue.900"
+                              : "gray"
+                          }
+                        />
                         <Icon
                           boxSize={16}
                           as={TfiLineDotted}
                           transform="rotate(90deg)"
                           color="gray"
                         />
-                        <Icon boxSize={4} as={FaRegDotCircle} color="gray" />
+                        <Icon
+                          boxSize={4}
+                          as={FaRegDotCircle}
+                          color={
+                            statusOptions[2] === pkg.deliveryStatus
+                              ? "blue.900"
+                              : "gray"
+                          }
+                        />
                       </Stack>
 
                       <Stack direction="column" spacing={6}>
                         <Stack direction="column" align="start" spacing={0}>
                           <Text fontSize="xl">Pending Pickup</Text>
-                          <Text fontWeight="thin">12:32</Text>
+                          <Text fontWeight="thin">
+                            {statusOptions.indexOf(pkg.deliveryStatus) == 0
+                              ? "In Progress"
+                              : "Completed"}
+                          </Text>
                         </Stack>
                         <Stack direction="column" align="start" spacing={0}>
                           <Text fontSize="xl">In Transit</Text>
-                          <Text fontWeight="thin">12:32</Text>
+                          <Text fontWeight="thin">
+                            {statusOptions.indexOf(pkg.deliveryStatus) < 1
+                              ? "Not There Yet"
+                              : statusOptions.indexOf(pkg.deliveryStatus) == 1
+                              ? "In Progress"
+                              : "Completed"}
+                          </Text>
                         </Stack>
                         <Stack direction="column" align="start" spacing={0}>
                           <Text fontSize="xl">Delivered</Text>
-                          <Text fontWeight="thin">12:32</Text>
+                          <Text fontWeight="thin">
+                            {statusOptions.indexOf(pkg.deliveryStatus) < 2
+                              ? "Not There Yet"
+                              : statusOptions.indexOf(pkg.deliveryStatus) == 2
+                              ? "In Progress"
+                              : "Completed"}
+                          </Text>
                         </Stack>
                       </Stack>
                     </Stack>
 
-										<CircularProgress value={10} color="#0088b4" size="100px">
-											<CircularProgressLabel>10%</CircularProgressLabel>
-										</CircularProgress>
+                    {/* <CircularProgress value={10} color="#0088b4" size="100px">
+                      <CircularProgressLabel>10%</CircularProgressLabel>
+                    </CircularProgress> */}
                   </Flex>
                 </Stack>
               </CardBody>

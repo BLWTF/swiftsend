@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 import LandingNavbar from "../landing-navbar";
 import { Wrap } from "../wrap";
+import TawkMessengerReactUmd from "@tawk.to/tawk-messenger-react";
 
 export default function Main({ children, noWrap = false }) {
   return (
@@ -35,6 +36,11 @@ export default function Main({ children, noWrap = false }) {
           <Box>{children}</Box>
         </>
       )}
+
+      <TawkMessengerReactUmd
+        propertyId="6481e4cfcc26a871b0216357"
+        widgetId="1h2dmbj5a"
+      />
     </>
   );
 }

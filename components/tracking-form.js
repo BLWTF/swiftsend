@@ -1,4 +1,4 @@
-import { Box, Button, Input, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Input, Stack, Text, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -7,6 +7,7 @@ export default function TrackingForm() {
   const [trackingNumber, setTrackingNumber] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const toast = useToast();
 
   async function handleSubmit() {
     setIsLoading(true);
@@ -14,6 +15,17 @@ export default function TrackingForm() {
       `/api/check-tracking-number?trackingNumber=${trackingNumber}`
     );
     const { pkg } = res.data;
+    if (!pkg) {
+      toast({
+        title: "Error",
+        description: "Please check the number and try again.",
+        status: "error",
+        duration: 9000,
+        position: "top-right",
+      });
+      setIsLoading(false);
+      return;
+    }
     router.push(`/tracked-package?id=${pkg.id}`);
     setIsLoading(false);
   }

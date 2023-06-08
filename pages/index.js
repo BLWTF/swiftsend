@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Image, Stack } from "@chakra-ui/react";
 import Layout from "../components/layouts/landing";
 import TrackingForm from "@/components/tracking-form";
 import { withIronSessionSsr } from "iron-session/next";
@@ -25,13 +18,13 @@ export default function Page() {
                 </Stack>
               </Flex>
               <Flex flex={1} align="center">
-                <Image alt="" src="/images/hero.png" />
+                <Image alt="hero" src="/images/hero.png" />
               </Flex>
             </Stack>
-            
           </Stack>
         </Container>
       </Box>
+      
     </Layout>
   );
 }
