@@ -90,11 +90,17 @@ export default function Page({ router, auth, pkg }) {
               </Flex>
               <Stack direction="column" spacing={0}>
                 <Text fontWeight="light">From:</Text>
-                <Text fontWeight="bold">{`${pkg.fromAddress}, ${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}`}</Text>
+                <Text fontWeight="bold">
+                  {`${pkg.fromAddress}`}
+                  {pkg.fromCity?.id ? `, ${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}` : ""}
+                </Text>
               </Stack>
               <Stack direction="column" spacing={0}>
                 <Text fontWeight="light">To:</Text>
-                <Text fontWeight="bold">{`${pkg.toAddress}, ${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}`}</Text>
+                <Text fontWeight="bold">
+                  {`${pkg.toAddress}`}
+                  {pkg.toCity?.id ? `, ${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}` : ""}
+                </Text>
               </Stack>
               <Flex justifyContent="space-between">
                 <Stack direction="column" spacing={0}>
