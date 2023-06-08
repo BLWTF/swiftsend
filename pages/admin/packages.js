@@ -197,8 +197,8 @@ const PackagesPaginatedTable = ({
                     </Td>
                     <Td>{pkg.senderName}</Td>
                     <Td>{pkg.packageContent}</Td>
-                    <Td>{pkg.fromCity.name}</Td>
-                    <Td>{pkg.toCity.name}</Td>
+                    <Td>{pkg.fromCity?.name ?? ""}</Td>
+                    <Td>{pkg.toCity?.name ?? ""}</Td>
                   </Tr>
                 ))}
             </Tbody>
