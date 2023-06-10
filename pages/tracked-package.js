@@ -3,8 +3,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CircularProgress,
-  CircularProgressLabel,
   Container,
   Flex,
   Heading,
@@ -32,8 +30,6 @@ export default function Page({ pkg }) {
     `/api/admin/is-paused?packageId=${pkg.id}`
   );
   const isPaused = data?.isPaused;
-  console.log("isPaused");
-  console.log(isPaused);
 
   useEffect(() => {
     if (isPaused !== undefined) {
@@ -41,7 +37,7 @@ export default function Page({ pkg }) {
         toast({
           title: "Error",
           description:
-            "We have an issue with your package. Please contact or chat with us. Thanks.",
+            "We have an issue with your package. Please call +1 (641) 247-8194 or chat with us. Thanks.",
           status: "error",
           duration: null,
           position: "top-right",
