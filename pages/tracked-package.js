@@ -93,6 +93,7 @@ export default function Page({ pkg }) {
                         From
                       </Text>
                       <Text>
+                        {`${pkg.senderName} - `}
                         {`${pkg.fromAddress}`}
                         {pkg.fromCity?.id
                           ? `, ${pkg.fromCity.name} ${pkg.fromCity.state.name}, ${pkg.fromCity.state.country.name}`
@@ -116,6 +117,7 @@ export default function Page({ pkg }) {
                         To
                       </Text>
                       <Text>
+                        {`${pkg.recipientName} - `}
                         {`${pkg.toAddress}`}
                         {pkg.toCity?.id
                           ? `, ${pkg.toCity.name} ${pkg.toCity.state.name}, ${pkg.toCity.state.country.name}`
