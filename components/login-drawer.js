@@ -107,7 +107,6 @@ export default function LoginDrawer({ isOpen, onClose, onRegisterOpen }) {
               <Flex>
                 <Text fontSize="sm">{"Don't have an account? "}</Text>
                 <Link
-                  href="#"
                   onClick={(e) => {
                     onClose();
                     onRegisterOpen();
