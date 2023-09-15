@@ -6,11 +6,13 @@ import {
   Image,
   Link,
   Stack,
+  Icon,
   useDisclosure,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import LoginDrawer from "./login-drawer";
 import RegisterDrawer from "./register-drawer";
+import { AiFillPhone } from 'react-icons/ai';
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href;
@@ -39,12 +41,29 @@ export default function LandingNavbar() {
       as="nav"
       w="100%"
       position="fixed"
-      bg="#FFF" 
+      bg="#FFF"
       top={0}
       borderBottomStyle="solid"
       borderBottomWidth="thin"
       zIndex={99}
     >
+      <Box
+        p={4}
+        w="100%"
+        bg="#FFF"
+        borderBottomStyle="solid"
+        borderBottomWidth="thin"
+        zIndex={99}
+      >
+        <Container maxW="container.lg">
+          <Flex align="center" fontSize="medium" fontWeight="bold">
+            <Icon as={AiFillPhone} color="#0088b4" mr={2} />
+            <Link href={`tel:+16412478194`}>
+              {'+16412478194'}
+            </Link>
+          </Flex>
+        </Container>
+      </Box>
       <Container p={2} maxW="container.lg">
         <Box
           display="flex"
@@ -68,12 +87,7 @@ export default function LandingNavbar() {
             width={{ base: "full", md: "auto" }}
             alignItems="center"
             flex={1}
-          >
-            <LinkItem href="/personal">Home</LinkItem>
-            <LinkItem href="/business">Services</LinkItem>
-            <LinkItem href="/investment">About</LinkItem>
-            <LinkItem href="/online">Contact</LinkItem>
-          </Stack>
+          ></Stack>
 
           <Box flex={1} align="right">
             <Button bg="#0088b4" color="#FFF" onClick={onLoginOpen}>
