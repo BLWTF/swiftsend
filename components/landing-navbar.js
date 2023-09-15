@@ -12,7 +12,7 @@ import {
 import NextLink from "next/link";
 import LoginDrawer from "./login-drawer";
 import RegisterDrawer from "./register-drawer";
-import { AiFillPhone } from 'react-icons/ai';
+import { AiFillPhone } from "react-icons/ai";
 
 const LinkItem = ({ href, path, children }) => {
   const active = path === href;
@@ -23,6 +23,8 @@ const LinkItem = ({ href, path, children }) => {
     </Link>
   );
 };
+
+const phone = "+1 641-247-8194";
 
 export default function LandingNavbar() {
   const {
@@ -56,11 +58,17 @@ export default function LandingNavbar() {
         zIndex={99}
       >
         <Container maxW="container.lg">
-          <Flex align="center" fontSize="medium" fontWeight="bold">
+          <Flex
+            align="center"
+            fontSize="large"
+            fontWeight="bold"
+            animation={{
+              base: "marquee-sm 15s linear 0s infinite normal none running",
+              md: "marquee-md 15s linear 0s infinite normal none running",
+            }}
+          >
             <Icon as={AiFillPhone} color="#0088b4" mr={2} />
-            <Link href={`tel:+16412478194`}>
-              {'+16412478194'}
-            </Link>
+            <Link href={`tel:${phone}`}>{phone}</Link>
           </Flex>
         </Container>
       </Box>

@@ -3,6 +3,7 @@ import Head from "next/head";
 import LandingNavbar from "../landing-navbar";
 import { Wrap } from "../wrap";
 import TawkMessengerReactUmd from "@tawk.to/tawk-messenger-react";
+import Footer from "../footer";
 
 export default function Main({ children, noWrap = false }) {
   return (
@@ -23,17 +24,19 @@ export default function Main({ children, noWrap = false }) {
       </Head>
 
       {!noWrap && (
-        <Wrap>
-          <LandingNavbar />
+        <>
+            <LandingNavbar />
 
-          <Box>{children}</Box>
-        </Wrap>
+            <Box>{children}</Box>
+          <Footer />
+        </>
       )}
       {noWrap && (
         <>
           <LandingNavbar />
 
           <Box>{children}</Box>
+          <Footer />
         </>
       )}
 

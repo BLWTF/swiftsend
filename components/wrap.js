@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react"
 import styled from "@emotion/styled"
 
 export const Wrap = styled(Box)`
-	&:before {
+	&:after {
 		content: " ";
 		display: block;
 		position: absolute;

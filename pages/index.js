@@ -1,4 +1,11 @@
-import { Box, Container, Flex, Heading, Image, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+} from "@chakra-ui/react";
 import Layout from "../components/layouts/landing";
 import TrackingForm from "@/components/tracking-form";
 import { withIronSessionSsr } from "iron-session/next";
@@ -23,23 +30,6 @@ export default function Page() {
             </Stack>
           </Stack>
         </Container>
-
-        <Box
-          py={6}
-          w="100%"
-          bg="#FFF"
-          borderTopStyle="solid"
-          borderTopWidth="thin"
-        >
-          <Container maxW="container.lg">
-            <Image
-              alt="SwiftSend"
-              src="/images/logo.svg"
-              width={150}
-              height={16}
-            />
-          </Container>
-        </Box>
       </Box>
     </Layout>
   );
