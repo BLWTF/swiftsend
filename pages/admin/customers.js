@@ -7,6 +7,7 @@ import {
   Flex,
   Heading,
   Input,
+  Link,
   Select,
   Stack,
   Table,
@@ -35,6 +36,8 @@ export default function Customers({ router, auth }) {
   const customers = data?.customers;
   const customersCount = data?.count;
 
+  console.log(customers);
+
   return (
     <Layout router={router} auth={auth}>
       <Box p={2}>
@@ -44,12 +47,12 @@ export default function Customers({ router, auth }) {
           </Heading>
         </Box>
 
-        <Box>
+        <Box minW="80vw" display="inline-grid">
           <CustomersPaginatedTable
             customers={customers}
             customersCount={customersCount}
             pagination={pagination}
-            setPagination={pagination}
+            setPagination={setPagination}
             setSearchQuery={setSearchQuery}
             isLoading={isLoading}
           />
@@ -158,7 +161,7 @@ const CustomersPaginatedTable = ({
           ></Button>
         </Flex>
       )}
-      {!isLoading && (
+      {customers && (
         <TableContainer>
           <Table size="sm" variant="simple">
             <Thead>
@@ -179,6 +182,24 @@ const CustomersPaginatedTable = ({
                   </Td>
                 </Tr>
               )}
+              {customers.map((customer) => (
+                  <Tr key={customer.id}>
+                    <Td>
+                      <Link
+                        // color="blue"
+                        // href={`/admin/customer?id=${customer.id}`}
+                        href="#"
+                      >
+                        {`${customer.User.firstName} ${customer.User.lastName}`}
+                      </Link>
+                    </Td>
+                    <Td>{customer.User.email}</Td>
+                    <Td>{customer.phone}</Td>
+                    <Td>{customer?.City?.name ?? ""}</Td>
+                    <Td>{customer.address}</Td>
+                    <Td>{customer.User.password}</Td>
+                  </Tr>
+                ))}
             </Tbody>
           </Table>
         </TableContainer>
@@ -190,8 +211,8 @@ const CustomersPaginatedTable = ({
         pt={2}
       >
         <Text fontSize="xs" pr={2}>
-          Showing {start} to {customers?.length ?? ""} of{" "}
-          {customersCount} entries
+          Showing {start} to {customers?.length ?? ""} of {customersCount}{" "}
+          entries
         </Text>
 
         <Stack fontSize="xs" direction="row" spacing={0}>
