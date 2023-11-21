@@ -18,14 +18,14 @@ export default function Footer() {
             height={16}
           />
 
-          <Stack direction="row" spacing={3}>
+          {/* <Stack direction="row" spacing={3}>
             <Link href="https://wa.link/nid4w8" isExternal>
               <Icon as={PiWhatsappLogoDuotone} boxSize={12} />
             </Link>
             <Link href="https://t.me/+16412478194" isExternal>
               <Icon as={PiTelegramLogoDuotone} boxSize={12} />
             </Link>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Container>
     </Box>

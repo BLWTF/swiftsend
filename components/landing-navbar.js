@@ -57,7 +57,7 @@ export default function LandingNavbar() {
         borderBottomWidth="thin"
         zIndex={99}
       >
-        <Container maxW="container.lg">
+        {/* <Container maxW="container.lg">
           <Flex
             align="center"
             fontSize="large"
@@ -70,7 +70,7 @@ export default function LandingNavbar() {
             <Icon as={AiFillPhone} color="#0088b4" mr={2} />
             <Link href={`tel:${phone}`}>{phone}</Link>
           </Flex>
-        </Container>
+        </Container> */}
       </Box>
       <Container p={2} maxW="container.lg">
         <Box
