@@ -41,8 +41,8 @@ export default function Main({ children, noWrap = false }) {
       )}
 
       <TawkMessengerReactUmd
-        propertyId="6481e4cfcc26a871b0216357"
-        widgetId="1h2dmbj5a"
+        propertyId="65746f3470c9f2407f7dd48e"
+        widgetId="1hh7d4q5i"
       />
     </>
   );
