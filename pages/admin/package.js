@@ -22,6 +22,7 @@ import {
   StackDivider,
   Tag,
   Text,
+  Input,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { withIronSessionSsr } from "iron-session/next";
@@ -36,6 +37,10 @@ export default function Page({ router, auth, pkg }) {
   const [isLoadingPause, setIsLoadingPause] = useState(false);
   const [status, setStatus] = useState(pkg.deliveryStatus);
   const [isLoadingStatus, setIsLoadingStatus] = useState(false);
+  const [isCurLoading, setIsCurLoading] = useState(false);
+  const [currentLocationState, setCurrentLocationState] = useState(
+    pkg.currentLocation
+  );
 
   async function togglePause() {
     setIsLoadingPause(true);
@@ -54,6 +59,13 @@ export default function Page({ router, auth, pkg }) {
     await axios.post(`/api/admin/update-package?packageId=${pkg.id}`, body);
     body.deliveryStatus ? setStatus(body.deliveryStatus) : null;
     body.deliveryStatus ? setIsLoadingStatus(false) : null;
+  }
+
+  async function handleCurrentLocation() {
+    setIsCurLoading(true);
+    const body = { currentLocation: currentLocationState };
+    await axios.post(`/api/admin/update-package?packageId=${pkg.id}`, body);
+    setIsCurLoading(false);
   }
 
   return (
@@ -156,6 +168,18 @@ export default function Page({ router, auth, pkg }) {
                       disabled
                     ></Button>}
                   </Stack>
+                </Stack>
+
+                <Stack direction="column" spacing={0}>
+                  <Text fontWeight="light">Curent Location:</Text>
+
+                  <Flex align="center" gap={2}>
+                    <Input
+                      value={currentLocationState}
+                      onChange={(e) => setCurrentLocationState(e.target.value)}
+                    />
+                    <Button onClick={handleCurrentLocation} isLoading={isCurLoading}>Save</Button>
+                  </Flex>
                 </Stack>
               </Flex>
               <Flex justifyContent="space-between">

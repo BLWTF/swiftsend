@@ -83,7 +83,7 @@ export default function Page({ pkg }) {
             <Card align="center">
               <CardBody align="center">
                 <Stack direction="column" spacing={2}>
-                  <Flex>
+                  <Flex wrap={{ base: "wrap", md: "nowrap" }} justify="center">
                     <Stack>
                       <Text fontSize="sm" fontWeight="medium">
                         From
@@ -97,16 +97,110 @@ export default function Page({ pkg }) {
                       </Text>
                     </Stack>
 
-                    <Stack
-                      direction="row"
-                      spacing={0}
-                      align="center"
-                      verticalAlign="center"
-                    >
-                      <Icon as={FaRegDotCircle} />
-                      <Icon boxSize={10} as={TfiLineDotted} />
-                      <Icon as={FaRegDotCircle} />
-                    </Stack>
+                    {pkg?.currentLocation && (
+                      <>
+                        <Box display={{ base: "none", md: "block" }}>
+                          <Stack
+                            direction="row"
+                            spacing={0}
+                            align="center"
+                            verticalAlign="center"
+                          >
+                            <Icon as={FaRegDotCircle} />
+                            <Icon boxSize={10} as={TfiLineDotted} />
+                            <Icon as={FaRegDotCircle} />
+                          </Stack>
+                        </Box>
+                        
+                        <Box display={{ base: undefined, md: "none" }}>
+                          <Stack
+                            direction="column"
+                            spacing={0}
+                            align="center"
+                            py={5}
+                          >
+                            <Icon
+                              boxSize={4}
+                              as={FaRegDotCircle}
+                              // color={
+                              //   statusOptions[0] === pkg.deliveryStatus
+                              //     ? "blue.900"
+                              //     : "gray"
+                              // }
+                            />
+                            <Icon
+                              boxSize={16}
+                              as={TfiLineDotted}
+                              transform="rotate(90deg)"
+                              // color="gray"
+                            />
+                            <Icon
+                              boxSize={4}
+                              as={FaRegDotCircle}
+                              // color={
+                              //   statusOptions[1] === pkg.deliveryStatus
+                              //     ? "blue.900"
+                              //     : "gray"
+                              // }
+                            />
+                          </Stack>
+                        </Box>
+
+                        <Stack w="100%">
+                          <Text fontSize="sm" fontWeight="medium">
+                            Currently
+                          </Text>
+                          <Text>{`${pkg.currentLocation}`}</Text>
+                        </Stack>
+                      </>
+                    )}
+
+                    <Box display={{ base: "none", md: "block" }}>
+                      <Stack
+                        direction="row"
+                        spacing={0}
+                        align="center"
+                        verticalAlign="center"
+                      >
+                        <Icon as={FaRegDotCircle} />
+                        <Icon boxSize={10} as={TfiLineDotted} />
+                        <Icon as={FaRegDotCircle} />
+                      </Stack>
+                    </Box>
+
+                    <Box display={{ base: undefined, md: "none" }}>
+                      <Stack
+                        direction="column"
+                        spacing={0}
+                        align="center"
+                        py={5}
+                      >
+                        <Icon
+                          boxSize={4}
+                          as={FaRegDotCircle}
+                          // color={
+                          //   statusOptions[0] === pkg.deliveryStatus
+                          //     ? "blue.900"
+                          //     : "gray"
+                          // }
+                        />
+                        <Icon
+                          boxSize={16}
+                          as={TfiLineDotted}
+                          transform="rotate(90deg)"
+                          // color="gray"
+                        />
+                        <Icon
+                          boxSize={4}
+                          as={FaRegDotCircle}
+                          // color={
+                          //   statusOptions[1] === pkg.deliveryStatus
+                          //     ? "blue.900"
+                          //     : "gray"
+                          // }
+                        />
+                      </Stack>
+                    </Box>
 
                     <Stack>
                       <Text fontSize="sm" fontWeight="medium">
